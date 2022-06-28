@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
+import ProductCard from '../components/ProductCard.js';
 import styles from '../styles/Home.module.css';
 
 const products = [
-  { name: 'Product 1', price: 10, description: 'desc 1' },
-  { name: 'Product 2', price: 20, description: 'desc 2' },
+  { id: 0, name: 'Product 1', price: 10, description: 'desc 1' },
+  { id: 1, name: 'Product 2', price: 20, description: 'desc 2' },
 ];
 export default function Home() {
   return (
@@ -16,10 +18,11 @@ export default function Home() {
       </Head>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 px-10 bg-grey-300'>
         <div>Text</div>
-        {products.map((product, index) => (
+        {products.map((product) => (
           <>
-            <div>{product.name}</div>
-            <div>{product.description}</div>
+            <Link href={'/' + product.id}>
+              <ProductCard product={product} />
+            </Link>
           </>
         ))}
       </div>
