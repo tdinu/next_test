@@ -19,8 +19,8 @@ const Products = () => {
   return (
     <div>
       <Head>
-        <title>Next.js Shopping Cart</title>
-        <meta property='og:title' content='Next.js Shopping Cart' key='title' />
+        <title>Products</title>
+        <meta property='og:title' content='Products' key='title' />
       </Head>
       <h1>Our Products</h1>
       {products.map((product) => (
@@ -48,7 +48,7 @@ const Products = () => {
             </a>
           </Link>
           <div className=''>
-            <button className=''>${product.price}</button>
+            <button className=''>€ {product.price}</button>
             {inCart(product.id) && (
               <button onClick={() => removeItem(product.id)} className=''>
                 <svg
