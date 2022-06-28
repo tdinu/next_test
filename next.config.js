@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  images: {
+    domains: ['amazon.com', 'm.media-amazon.com'],
+  },
+
   async redirects() {
     return [
       {
