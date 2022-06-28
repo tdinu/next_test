@@ -9,11 +9,24 @@ import styles from '../styles/Home.module.css';
 export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
-      query Countries {
-        countries {
-          code
-          name
-          emoji
+      query Launches {
+        launches {
+          mission_name
+          mission_id
+          rocket {
+            rocket_name
+            rocket {
+              company
+              name
+              mass {
+                kg
+              }
+            }
+          }
+          launch_site {
+            site_name
+          }
+          launch_date_local
         }
       }
     `,
@@ -21,12 +34,12 @@ export async function getStaticProps() {
 
   return {
     props: {
-      countries: data.countries.slice(0, 4),
+      launches: data.launches.slice(0, 4),
     },
   };
 }
 
-export default function Home({ countries }) {
+export default function Home({ launches }) {
   return (
     <div className='container mx-auto'>
       <Head>
