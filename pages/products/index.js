@@ -13,7 +13,15 @@ import ProductCard from '../../components/ProductCard.js';
   { id: 1, name: 'Product 2', price: 20, description: 'desc 2' },
 ]; */
 
-const Products = () => {
+export const getStaticProps = async () => {
+  const data = products;
+
+  return {
+    props: { products: data },
+  };
+};
+
+const Products = ({ products }) => {
   // console.log(products);
   const { addItem, inCart, removeItem } = useCart();
   return (
@@ -22,7 +30,14 @@ const Products = () => {
         <title>Products</title>
         <meta property='og:title' content='Products' key='title' />
       </Head>
-      <h1>Our Products</h1>
+      <div className='grid'>
+        <h1>Our Products</h1>{' '}
+        <Link href={'/cart'}>
+          <a>
+            <h1>See Cart</h1>
+          </a>
+        </Link>
+      </div>
       {products.map((product) => (
         <div className='' key={product.id}>
           <Link href={'/products/' + product.id}>
