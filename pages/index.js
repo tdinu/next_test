@@ -1,9 +1,32 @@
+import { gql } from '@apollo/client';
+import client from '../apollo-client';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: gql`
+      query Countries {
+        countries {
+          code
+          name
+          emoji
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      countries: data.countries.slice(0, 4),
+    },
+  };
+}
+
+export default function Home({ countries }) {
   return (
     <div className='container mx-auto'>
       <Head>

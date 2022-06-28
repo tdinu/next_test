@@ -38,34 +38,58 @@ const Products = ({ products }) => {
           </a>
         </Link>
       </div>
-      {products.map((product) => (
-        <div className='' key={product.id}>
-          <Link href={'/products/' + product.id}>
-            <a className={styles.single}>
-              {/*<ProductCard product={product} />*/}
-              <div className=''>
+      <div className='grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
+        {products.map((product) => (
+          <div className='' key={product.id}>
+            <Link href={'/products/' + product.id} className='group'>
+              <a className={styles.single}>
+                {/*<ProductCard product={product} />*/}
                 <div className=''>
-                  <Image
-                    src={product.image}
-                    width='150'
-                    height='150'
-                    priority
-                    className=''
-                    alt={product.name}
-                  />
+                  <div className='w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8'>
+                    <Image
+                      src={product.image}
+                      width='100'
+                      height='70'
+                      layout='responsive'
+                      priority
+                      className='w-full h-full object-center object-cover group-hover:opacity-75'
+                      alt={product.name}
+                    />
 
-                  <div className=''>
-                    <h6 className=''>{product.name}</h6>
-                    <div className=''></div>
+                    <div className=''>
+                      <h6 className='mt-4 text-sm text-gray-700'>
+                        {product.name}
+                      </h6>
+                      <div className=''></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </Link>
-          <div className=''>
-            <button className=''>€ {product.price}</button>
-            {inCart(product.id) && (
-              <button onClick={() => removeItem(product.id)} className=''>
+              </a>
+            </Link>
+            <div className='mx-8'>
+              <button className='mt-1 mr-2 text-lg font-medium text-gray-900'>
+                € {product.price}
+              </button>
+              {inCart(product.id) && (
+                <button onClick={() => removeItem(product.id)} className=''>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
+                  </svg>
+                </button>
+              )}
+
+              <button onClick={() => addItem(product)} className=''>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='h-6 w-6'
@@ -77,31 +101,14 @@ const Products = ({ products }) => {
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
-                    d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                    d='M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
                   />
                 </svg>
               </button>
-            )}
-
-            <button onClick={() => addItem(product)} className=''>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth='2'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                />
-              </svg>
-            </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
