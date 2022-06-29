@@ -39,7 +39,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ launches }) {
+export default function Home() {
   return (
     <div className='container mx-auto'>
       <Head>

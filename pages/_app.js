@@ -1,11 +1,14 @@
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import { CartProvider } from 'react-use-cart';
+import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
   return (
     <CartProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </CartProvider>
   );
 }

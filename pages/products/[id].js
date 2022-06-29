@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { images } from '../../utils/images';
+import ProductDetails from '../../components/ProductDetails';
 
 import { gql } from '@apollo/client';
 import client from '../../apollo-client';
@@ -44,6 +45,7 @@ export const getStaticProps = async (context) => {
           tree_name
           fruit_name
           family
+          description
         }
       }
     `,
@@ -56,24 +58,12 @@ export const getStaticProps = async (context) => {
 
 const Details = ({ product }) => {
   return (
-    <div>
-      <div className=''>
-        <div className=''>
-          <Image
-            src={images[parseInt(product.id) - 1]}
-            width='150'
-            height='150'
-            priority
-            className=''
-            alt={product.fruit_name}
-          />
-
-          <div className=''>
-            <h6 className=''>{product.fruit_name}</h6>
-            <div className=''>{product.origin}</div>
-          </div>
-        </div>
-      </div>
+    <div className='w-9/12 h-9/12 mx-auto'>
+      <ProductDetails
+        product={product}
+        image={images[parseInt(product.id) - 1]}
+        index={parseInt(product.id)}
+      />
     </div>
   );
 };
