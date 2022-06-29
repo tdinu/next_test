@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import { useCart } from 'react-use-cart';
-import products from '../utils/data.js';
+import { images } from '../utils/images';
 
 const Cart = () => {
   const { updateItemQuantity, items, cartTotal } = useCart();
@@ -19,19 +19,19 @@ const Cart = () => {
             <div className=''>
               <div className=''>
                 <Image
-                  src={product.image}
+                  src={images[parseInt(product.id) - 1]}
                   width='100'
                   height='100'
                   priority
                   className=''
-                  alt={product.name}
+                  alt={product.fruit_name}
                 />
               </div>
               <div className=''>
                 <div className=''>
-                  <p className=''>{product.name}</p>
+                  <p className=''>{product.fruit_name}</p>
                   <p className=''>
-                    {product.quantity} x ${product.price}
+                    {product.quantity} x € {product.price}
                   </p>
                 </div>
                 <div className='card-body py-0 btn-group float-end'>
