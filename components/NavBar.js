@@ -82,7 +82,7 @@ function NavBar() {
           <Link href={'/products'}>
             <a
               className={
-                'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium'
               }
             >
               Products
@@ -91,7 +91,7 @@ function NavBar() {
           <Link href='/cart'>
             <a
               className={
-                'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium'
               }
             >
               Cart

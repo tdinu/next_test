@@ -5,7 +5,7 @@ import { useCart } from 'react-use-cart';
 import { images } from '../utils/images';
 
 const Cart = () => {
-  const { updateItemQuantity, items, cartTotal } = useCart();
+  const { updateItemQuantity, items, cartTotal, isEmpty } = useCart();
   return (
     <div>
       <Head>
@@ -27,8 +27,8 @@ const Cart = () => {
               <div className='mt-8'>
                 <div className='flow-root'>
                   <ul role='list' className='-my-6 divide-y divide-gray-200'>
-                    {items.length > 0 ? (
-                      items.map((product) => (
+                    {!isEmpty ? (
+                      items && items.length > 0 && items.map((product) => (
                         <li key={product.id} className='flex py-6'>
                           <div className='flex'>
                             <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
@@ -38,7 +38,7 @@ const Cart = () => {
                                 height='100'
                                 layout='responsive'
                                 priority
-                                className=''
+                                className='w-full h-full object-center object-cover'
                                 alt={product.fruit_name}
                               />
                             </div>
@@ -49,9 +49,8 @@ const Cart = () => {
                                   {product.quantity} x € {product.price}
                                 </p>
                               </div>
-                              
+
                               <div className='my-2 flex items-start content-start flex-wrap md:flex-nowrap'>
-                              
                                 <button
                                   onClick={() =>
                                     product.quantity > 0 &&
@@ -102,9 +101,10 @@ const Cart = () => {
                                   </svg>
                                 </button>
                                 <div className='px-4'>
-                                <p className=''>Total : € {product.itemTotal}</p>
-                                
-                              </div>
+                                  <p className=''>
+                                    Total : € {product.itemTotal}
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>{' '}
@@ -112,36 +112,59 @@ const Cart = () => {
                         </li>
                       ))
                     ) : (
-                      <div>No products added</div>
+                      <>
+                        <div className='py-4'>No products added</div>
+                        <Link href={'/products'}>
+                          <a
+                            className={
+                              'font-medium text-indigo-600 hover:text-indigo-500'
+                            }
+                          >
+                            Return to Products
+                          </a>
+                        </Link>{' '}
+                      </>
                     )}
                   </ul>
                 </div>
               </div>
             </div>
 
-            {items.length > 0 && (
-              <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-              <div className="flex justify-between text-base font-medium text-gray-900">
-                <p>Subtotal</p>
-                <p>€ {cartTotal}</p>
-              </div>
-              <div className="mt-6">
-                <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-              </div>
-              <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                <p>
-                  or <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500"><Link href={'/products'}>
+            {!isEmpty && (
+              <div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
+                <div className='flex justify-between text-base font-medium text-gray-900'>
+                  <p>Subtotal</p>
+                  <p>€ {cartTotal}</p>
+                </div>
+                <div className='mt-6'>
                   <a
-                    className={
-                      'font-medium text-indigo-600 hover:text-indigo-500'
-                    }
+                    href='#'
+                    className='flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'
                   >
-                  Continue Shopping
+                    Checkout
                   </a>
-                </Link><span aria-hidden="true"> &rarr;</span></button>
-                </p>
+                </div>
+                <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
+                  <p>
+                    or{' '}
+                    <button
+                      type='button'
+                      className='font-medium text-indigo-600 hover:text-indigo-500'
+                    >
+                      <Link href={'/products'}>
+                        <a
+                          className={
+                            'font-medium text-indigo-600 hover:text-indigo-500'
+                          }
+                        >
+                          Continue Shopping
+                        </a>
+                      </Link>
+                      <span aria-hidden='true'> &rarr;</span>
+                    </button>
+                  </p>
+                </div>
               </div>
-            </div>
             )}
           </div>
         </div>
